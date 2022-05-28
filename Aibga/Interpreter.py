@@ -48,26 +48,6 @@ class Interpreter:
             value = self.executeHardOperation(value)
             self.variables_values[name_variable] = value
 
-        # try:
-        #     print(node.getTypeValue())
-        #     value = node.getValue()[0].getValue()
-        #     type_value = node.getTypeValue()
-        #     if len(value) == 1 or type(value) == str:
-        #         value = int(value)
-        #         if type_value == "INT":
-        #             self.variables_values[name_variable] = value
-        #         elif type_value == "VAR":
-        #             # print(value)
-        #             self.variables_values[name_variable] = self.variables_values[value]
-        # except Exception:
-        #     print("__________++++++++")
-        #     if node.getTypeValue() == "Operation":
-        #         value = self.executeOperation(node.getValue())
-        #         # print(len(value))
-        #         self.variables_values[name_variable] = value
-        #     elif node.getTypeValue() == "Hard":
-        #         value = self.executeHardOperation(node)
-
 
     def executePrint(self, node):
         type_value = node.getTypeValue()
@@ -297,11 +277,3 @@ class Interpreter:
 
         else:
             pass
-
-
-
-
-
-
-
-

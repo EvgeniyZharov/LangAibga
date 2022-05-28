@@ -48,7 +48,7 @@ def main():
     inter = Interpreter(node_list)  # Object for execute
     inter.execute()  # Start execute
 
-    print(inter.linkedlist_values)  # Show all variables
+    # print(inter.linkedlist_values)  # Show all variables
     # print(inter.variables_values)  # Show all LinkedList variables
 
 

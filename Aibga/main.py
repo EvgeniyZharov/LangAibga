@@ -2,11 +2,11 @@ from Lexer import Lexer
 from Parser import Parser
 from Interpreter import Interpreter
 
-kod_1 = ["a = ( 5 + 3 * ( 5 - 3 ) - 2 ) * 2 - 8 ; ",
+kod_1 = ["a = ( 5 + 3 * ( 5 - 3 ) - 2 ) * 2 - 17 ; ",
          "PRINT ( a ) ;",
          "b = 20 / a ;",
          "PRINT ( b ) ;",
-         "WHILE ( a < 1 ) { a = a + 1 ; PRINT ( a ) ; } ;",
+         "WHILE ( a < 5 ) { a = a + 1 ; PRINT ( a ) ; } ;",
          "IF ( 22 > b ) { PRINT ( b ) ; } ;",
          ]
 

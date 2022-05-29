@@ -16,7 +16,8 @@ kod_2 = ["LinkedList link_list = { 1 , 3 , 4 } ;",
          "link_list .delete ( 2 ) ;",
          "link_list .deleteAtHead ( ) ;",
          "link_list .search ( 2 ) ;",
-         "link_list .isEmpty ( ) ;"]
+         "link_list .isEmpty ( ) ;"
+        ]
 
 
 def get_kod():

@@ -57,3 +57,9 @@ class Token:
                f"number_line: {self.number_line}, position: {self.position}]"
         print(text)
 
+
+# test = "a == 43 = "
+#
+# print(re.search(DICT_TOKENS["ASSIGNMENT"], test))
+# print(list(DICT_TOKENS.values())[0])
+

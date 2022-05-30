@@ -28,6 +28,11 @@ class AssignNode(Node):
         return self.type_value
 
 
+
+    # def toString(self):
+    #     return pass
+
+
 class OperationNode(Node):
 
     def __init__(self, type_node, left_operand, right_operand, sign, final):
@@ -118,6 +123,7 @@ class OperationNode(Node):
         values = self.left_operand
         new_values = [elem.getValue() for elem in values]
         return int(self.function(new_values)[0])
+
 
 
 class WhileNode(Node):

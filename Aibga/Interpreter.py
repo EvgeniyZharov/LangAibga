@@ -1,5 +1,6 @@
 from Lexer import Lexer
 from Parser import Parser
+import LinkedList
 
 
 class Interpreter:
@@ -47,7 +48,6 @@ class Interpreter:
             values = value.getLeftOperand()
             value = self.executeHardOperation(value)
             self.variables_values[name_variable] = value
-
 
     def executePrint(self, node):
         type_value = node.getTypeValue()
@@ -198,10 +198,21 @@ class Interpreter:
         return value
 
     def executeLinkedList(self, node):
+        linkedlist_count = 0
+
         name = node.getName()
         values = node.getValues()
         new_values = [elem.getValue() for elem in values]
-        self.linkedlist_values[name] = new_values
+
+        new_linked_list = LinkedList.createLinkedList(new_values[0])
+        linkedlist_count += 1
+        for elem in new_values[1:]:
+            LinkedList.addElement(new_linked_list, elem)
+            linkedlist_count += 1
+        # value = {"values": new_linked_list, "count": }
+        self.linkedlist_values[name] = new_linked_list
+
+        # self.linkedlist_values[name] = new_values
 
     def executeLinkedListOperation(self, node):
         type_operation = node.getTypeOperation()
@@ -209,12 +220,16 @@ class Interpreter:
         if type_operation == "setLLInsertAtEnd":
             name_variable = node.getNameVariable()
             value = node.getValues()
-            value_type = value.getTypeToken()
+            # value_type = value.getTypeToken()
             value = value.getValue()
             if name_variable in self.linkedlist_values:
-                values = self.linkedlist_values[name_variable]
-                values.append(value)
-                self.linkedlist_values[name_variable] = values
+                linked_list = self.linkedlist_values[name_variable]
+                LinkedList.addElement(linked_list, value)
+                self.linkedlist_values[name_variable] = linked_list
+
+                # values = self.linkedlist_values[name_variable]
+                # values.append(value)
+                # self.linkedlist_values[name_variable] = values
             else:
                 print("ERROR")
 
@@ -224,9 +239,12 @@ class Interpreter:
             value_type = value.getTypeToken()
             value = value.getValue()
             if name_variable in self.linkedlist_values:
-                values = self.linkedlist_values[name_variable]
-                values = [value] + values
-                self.linkedlist_values[name_variable] = values
+                linked_list = self.linkedlist_values[name_variable]
+                LinkedList.insertElement(linked_list, value, 0)
+                self.linkedlist_values[name_variable] = linked_list
+                # values = self.linkedlist_values[name_variable]
+                # values = [value] + values
+                # self.linkedlist_values[name_variable] = values
             else:
                 print("ERROR")
 
@@ -236,9 +254,13 @@ class Interpreter:
             value_type = value.getTypeToken()
             value = value.getValue()
             if name_variable in self.linkedlist_values:
-                values = self.linkedlist_values[name_variable]
-                result = values.pop(int(value))
-                self.linkedlist_values[name_variable] = values
+                linked_list = self.linkedlist_values[name_variable]
+                result = LinkedList.deleteElement(linked_list, int(value))
+                self.linkedlist_values[name_variable] = linked_list
+
+                # values = self.linkedlist_values[name_variable]
+                # result = values.pop(int(value))
+                # self.linkedlist_values[name_variable] = values
                 print(f"Element is deleted: {result}")
             else:
                 print("ERROR")
@@ -246,9 +268,14 @@ class Interpreter:
         elif type_operation == "setLLDeleteAtHead":
             name_variable = node.getNameVariable()
             if name_variable in self.linkedlist_values:
-                values = self.linkedlist_values[name_variable]
-                result = values.pop(0)
-                self.linkedlist_values[name_variable] = values
+                linked_list = self.linkedlist_values[name_variable]
+                result = LinkedList.deleteElement(linked_list, 0)
+
+                self.linkedlist_values[name_variable] = linked_list
+
+                # values = self.linkedlist_values[name_variable]
+                # result = values.pop(0)
+                # self.linkedlist_values[name_variable] = values
                 print(f"Element is deleted: {result}")
             else:
                 print("ERROR")
@@ -259,16 +286,22 @@ class Interpreter:
             value_type = value.getTypeToken()
             value = value.getValue()
             if name_variable in self.linkedlist_values:
+                linked_list = self.linkedlist_values[name_variable]
+                result = LinkedList.foundElementIndex(linked_list, int(value))
+
                 values = self.linkedlist_values[name_variable]
-                print(f"Element on position {value}: {values[int(value)]}")
+                print(f"Element on position {value}: {result}")
             else:
                 print("ERROR")
 
         elif type_operation == "setLLIsEmpty":
             name_variable = node.getNameVariable()
             if name_variable in self.linkedlist_values:
-                values = self.linkedlist_values[name_variable]
-                if len(values) == 0:
+                linked_list = self.linkedlist_values[name_variable]
+                result = LinkedList.isEmpty(linked_list)
+
+                # values = self.linkedlist_values[name_variable]
+                if result:
                     print("LinkedList is empty.")
                 else:
                     print("LinkedList is NOT empty.")
@@ -277,3 +310,11 @@ class Interpreter:
 
         else:
             pass
+
+
+
+
+
+
+
+

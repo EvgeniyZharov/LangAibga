@@ -26,34 +26,38 @@ class FalseKod(Exception):
         return errorMessage(text)
 
 
-class NotSymbol(Exception):
+class NotSemicolon(Exception):
+
+    def __init__(self, line):
+        self.line = line
+
+    def __str__(self):
+        text = f"Не хватает символа в {self.line} строке: ;"
+        return errorMessage(text)
+
+
+class NotBracket(Exception):
 
     def __init__(self, data, line):
         self.data = data
         self.line = line
 
     def __str__(self):
-        text = f'Не хватает символа "{self.data}" в {self.line} строке'
+        text = f"Не корректное количество символов " \
+               f"в {self.line} строке: {self.data}"
         return errorMessage(text)
 
 
-class NotSemicolon(NotSymbol):
-
-    def __init__(self, line):
-        data = ";"
-        super().__init__(data, line)
-
-
-class NotBracket(NotSymbol):
+class NotFigureBracket(Exception):
 
     def __init__(self, data, line):
-        super().__init__(data, line)
+        self.data = data
+        self.line = line
 
-
-class NotFigureBracket(NotSymbol):
-
-    def __init__(self, data, line):
-        super().__init__(data, line)
+    def __str__(self):
+        text = f"Не корректное количество символов " \
+               f"в {self.line} строке: {self.data}"
+        return errorMessage(text)
 
 
 class IntInStartLine(Exception):

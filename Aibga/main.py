@@ -1,12 +1,13 @@
 from Lexer import Lexer
 from Parser import Parser
 from Interpreter import Interpreter
+import LinkedList
 
-kod_1 = ["a = ( 5 + 3 * ( 5 - 3 ) - 2 ) * 2 - 17 ; ",
+kod_1 = ["a = ( 5 + 3 * ( 5 - 3 ) - 2 ) * 2 - 8 ; ",
          "PRINT ( a ) ;",
          "b = 20 / a ;",
          "PRINT ( b ) ;",
-         "WHILE ( a < 5 ) { a = a + 1 ; PRINT ( a ) ; } ;",
+         "WHILE ( a < 1 ) { a = a + 1 ; PRINT ( a ) ; } ;",
          "IF ( 22 > b ) { PRINT ( b ) ; } ;",
          ]
 
@@ -16,8 +17,7 @@ kod_2 = ["LinkedList link_list = { 1 , 3 , 4 } ;",
          "link_list .delete ( 2 ) ;",
          "link_list .deleteAtHead ( ) ;",
          "link_list .search ( 2 ) ;",
-         "link_list .isEmpty ( ) ;"
-        ]
+         "link_list .isEmpty ( ) ;"]
 
 
 def get_kod():
@@ -32,11 +32,16 @@ def get_kod():
     return kod
 
 
+def showLinkedLists(linked_lists):
+    for elem in linked_lists:
+        LinkedList.showAllValues(linked_lists[elem])
+
+
 def main():
 
     # kod = get_kod()  # Input new kod
 
-    lexer = Lexer(kod_1)  # Search lexemes
+    lexer = Lexer(kod_2)  # Search lexemes
     # print(kod)  # Show lines of the kod
     lexer.analise()  # Analise lexemes
     lexemes = lexer.get()  # Get list of lexemes
@@ -51,6 +56,7 @@ def main():
 
     # print(inter.linkedlist_values)  # Show all variables
     # print(inter.variables_values)  # Show all LinkedList variables
+    showLinkedLists(inter.linkedlist_values)  # Show all elements after operation
 
 
 if __name__ == '__main__':
